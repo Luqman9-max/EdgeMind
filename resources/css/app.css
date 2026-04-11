@@ -10,26 +10,44 @@
    ============================================ */
 
 /* --- CSS Custom Properties --- */
-:root {
-    --em-black: #0A0A0B;
-    --em-charcoal: #141418;
-    --em-gunmetal: #1E1E25;
-    --em-steel: #2A2A35;
-    --em-slate: #6B6B7B;
-    --em-silver: #B0B0C0;
-    --em-white: #F0F0F5;
-    --em-accent: #FF3D00;
-    --em-accent-hot: #FF6B35;
-    --em-accent-glow: rgba(255, 61, 0, 0.15);
-    --em-ice: #00D4FF;
-    --em-ice-muted: rgba(0, 212, 255, 0.10);
+@theme {
+    --color-em-black: #0A0A0B;
+    --color-em-charcoal: #141418;
+    --color-em-gunmetal: #1E1E25;
+    --color-em-steel: #2A2A35;
+    --color-em-slate: #6B6B7B;
+    --color-em-silver: #B0B0C0;
+    --color-em-white: #F0F0F5;
+    --color-em-accent: #FF3D00;
+    --color-em-accent-hot: #FF6B35;
+    --color-em-accent-glow: rgba(255, 61, 0, 0.15);
+    --color-em-ice: #00D4FF;
+    --color-em-ice-muted: rgba(0, 212, 255, 0.10);
 
     --font-primary: 'Space Grotesk', sans-serif;
-    --font-body: 'Inter', sans-serif;
+    --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     --ease-sharp: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+:root {
+    --em-black: var(--color-em-black);
+    --em-charcoal: var(--color-em-charcoal);
+    --em-gunmetal: var(--color-em-gunmetal);
+    --em-steel: var(--color-em-steel);
+    --em-slate: var(--color-em-slate);
+    --em-silver: var(--color-em-silver);
+    --em-white: var(--color-em-white);
+    --em-accent: var(--color-em-accent);
+    --em-accent-hot: var(--color-em-accent-hot);
+    --em-accent-glow: var(--color-em-accent-glow);
+    --em-ice: var(--color-em-ice);
+    
+    --font-primary: var(--font-primary);
+    --font-body: var(--font-sans);
+    --font-mono: var(--font-mono);
 }
 
 /* --- Base Reset --- */
@@ -61,7 +79,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; }
-h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.15; }
 h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; }
 h4 { font-size: 1.25rem; font-weight: 600; }
 
@@ -261,7 +279,7 @@ a:hover {
 
 .card-edge:hover {
     border-color: var(--em-accent);
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 }
 
 .card-edge .card-image {
@@ -400,8 +418,8 @@ select.input-edge {
 /* --- Scroll Reveal Animation --- */
 .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.5s var(--ease-sharp), transform 0.5s var(--ease-sharp);
+    transform: translateY(32px);
+    transition: opacity 0.6s var(--ease-sharp), transform 0.6s var(--ease-sharp);
 }
 
 .reveal.revealed {
@@ -428,7 +446,7 @@ select.input-edge {
 .footer-edge {
     background: var(--em-charcoal);
     border-top: 1px solid var(--em-steel);
-    padding: 4rem 0 2rem;
+    padding: 5rem 0 2.5rem;
 }
 
 .footer-edge .footer-grid {
@@ -487,7 +505,7 @@ select.input-edge {
 
 .footer-edge .footer-bottom {
     border-top: 1px solid var(--em-steel);
-    padding-top: 2rem;
+    padding-top: 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -537,7 +555,7 @@ select.input-edge {
     }
 
     .container-edge {
-        padding: 0 1.25rem;
+        padding: 0 1.5rem;
     }
 }
 
