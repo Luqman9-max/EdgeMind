@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class BookRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:books,slug,' . $this->route('book')?->id,
+            'description' => 'required|string',
+            'short_description' => 'nullable|string|max:500',
+            'cover_image' => 'nullable|image|max:2048',
+            'author' => 'nullable|string|max:255',
+            'year' => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
+            'category' => 'nullable|string|max:255',
+            'is_featured' => 'boolean',
+            'is_published' => 'boolean',
+            'is_free' => 'boolean',
+            'gumroad_url' => 'nullable|url|max:255',
+            'price' => 'nullable|numeric|min:0',
+            'sort_order' => 'nullable|integer|min:0',
+        ];
+    }
+}
