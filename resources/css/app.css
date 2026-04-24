@@ -442,6 +442,193 @@ select.input-edge {
     width: 100%;
 }
 
+/* --- EdgeMind V2 Advanced Animations --- */
+
+/* Glitch Effect */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--em-accent);
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--em-ice);
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 35px, 0); transform: translate(2px); }
+    20% { clip: rect(62px, 9999px, 48px, 0); transform: translate(-2px); }
+    40% { clip: rect(89px, 9999px, 15px, 0); transform: translate(1px); }
+    60% { clip: rect(15px, 9999px, 86px, 0); transform: translate(2px); }
+    80% { clip: rect(52px, 9999px, 7px, 0); transform: translate(-1px); }
+    100% { clip: rect(28px, 9999px, 94px, 0); transform: translate(1px); }
+}
+@keyframes glitch-anim-2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); transform: translate(-2px); }
+    20% { clip: rect(12px, 9999px, 34px, 0); transform: translate(2px); }
+    40% { clip: rect(98px, 9999px, 71px, 0); transform: translate(-1px); }
+    60% { clip: rect(32px, 9999px, 49px, 0); transform: translate(2px); }
+    80% { clip: rect(74px, 9999px, 21px, 0); transform: translate(-2px); }
+    100% { clip: rect(19px, 9999px, 86px, 0); transform: translate(1px); }
+}
+
+/* Slam In Animations */
+.slam-in {
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 0.5s var(--ease-sharp), transform 0.5s var(--ease-sharp);
+}
+.slam-in.slammed {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slam-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.6s var(--ease-sharp), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.slam-left.slammed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slam-down {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.6s var(--ease-sharp), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.slam-down.slammed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slam-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s var(--ease-sharp), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.slam-right.slammed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger Word / Char Reveal */
+.char-reveal .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+}
+.char-reveal.revealed .char {
+    animation: fadeInUp 0.4s forwards var(--ease-sharp);
+}
+
+.word-reveal .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+}
+.word-reveal.revealed .word {
+    animation: fadeInUp 0.5s forwards var(--ease-sharp);
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CRT Scanline / Noise Overlay */
+.scan-line {
+    position: relative;
+}
+.scan-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+.scan-line-anim::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 61, 0, 0.1), transparent);
+    animation: scanSweep 6s infinite linear;
+    pointer-events: none;
+    z-index: 11;
+}
+@keyframes scanSweep {
+    0% { top: -100px; }
+    100% { top: 120%; }
+}
+
+/* Subtle Shake */
+.shake-subtle {
+    animation: subtleShake 4s infinite linear;
+}
+@keyframes subtleShake {
+    0%, 100% { transform: translate(0, 0); }
+    2%, 6%, 10% { transform: translate(-1px, 1px); }
+    4%, 8% { transform: translate(1px, -1px); }
+    12% { transform: translate(0, 0); }
+}
+
+/* Border Draw */
+.border-draw {
+    position: relative;
+}
+.border-draw::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--em-accent);
+    transition: width 0.8s var(--ease-sharp);
+}
+.border-draw.drawn::after {
+    width: 100%;
+}
+
+/* Pulse / Flash */
+.pulse-glow {
+    animation: pulseGlow 2s infinite alternate;
+}
+@keyframes pulseGlow {
+    from { box-shadow: 0 0 10px var(--em-accent-glow); }
+    to { box-shadow: 0 0 30px var(--em-accent-glow); }
+}
+.screen-flash.flashed {
+    animation: screenFlash 0.3s forwards;
+}
+@keyframes screenFlash {
+    0% { background: var(--em-white); }
+    100% { background: transparent; }
+}
+
 /* --- Footer --- */
 .footer-edge {
     background: var(--em-charcoal);
@@ -842,4 +1029,26 @@ select.input-edge {
 .pagination-edge .disabled span {
     color: var(--em-steel);
     cursor: not-allowed;
+}
+
+/* --- V2 Features --- */
+.typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--em-accent);
+    animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+}
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--em-accent); } }
+
+.terminal-prompt {
+    font-family: var(--font-mono);
+    color: var(--em-accent);
+}
+.metric-fill {
+    transform-origin: left;
+    transition: transform 1.5s var(--ease-out);
+}
+.dossier-card {
+    background-image: repeating-linear-gradient(45deg, rgba(20,20,24,0.5) 0, rgba(20,20,24,0.5) 1px, transparent 1px, transparent 4px);
 }
