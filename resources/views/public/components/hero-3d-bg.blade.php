@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
 
-    // Fragment Shader: procedural noise and distortion based on mouse
+    // Fragment Shader: procedural fractured mesh based on mouse
     const fsSource = `
         precision mediump float;
         uniform vec2 u_resolution;
@@ -67,36 +67,50 @@ document.addEventListener('DOMContentLoaded', () => {
             // Mouse distortion
             vec2 mouse_dist = st - u_mouse;
             float dist = length(mouse_dist);
-            float influence = smoothstep(0.8, 0.0, dist);
+            float influence = smoothstep(0.6, 0.0, dist);
             
             // Add movement and distortion
-            vec2 pos = st * 3.0;
-            pos.y += u_time * 0.1;
-            pos += mouse_dist * influence * 0.5;
+            vec2 pos = st * 15.0; // Grid scale
             
-            // Generate noise
-            float n = noise(pos * 5.0 + u_time * 0.5);
-            n += noise(pos * 10.0 - u_time * 0.2) * 0.5;
+            // Apply noise-based distortion + mouse influence
+            float n = noise(pos * 0.2 + u_time * 0.2);
             
-            // Add high-frequency grain
-            float grain = random(st * u_time) * 0.15;
+            // Fracture the grid where influence is high or noise is high
+            float fracture = influence * 2.0 + n * 0.5;
+            pos.x += noise(vec2(pos.y * 0.5, u_time)) * fracture;
+            pos.y += noise(vec2(pos.x * 0.5, u_time + 10.0)) * fracture;
             
-            // Color grading (Red / Orange / Dark)
-            vec3 color1 = vec3(0.04, 0.04, 0.04); // Dark background
-            vec3 color2 = vec3(1.0, 0.2, 0.0);    // Accent Red/Orange
-            vec3 color3 = vec3(0.1, 0.1, 0.15);   // Slightly blueish dark
+            // Perspective transform (pseudo 3D floor)
+            pos.y /= max(0.1, (1.0 - st.y * 0.8));
+            pos.y -= u_time * 2.0; // Move forward
             
-            vec3 finalColor = mix(color1, color3, n);
-            // Add accent color based on noise intensity and mouse proximity
-            float accentVal = smoothstep(0.7, 1.0, n + influence * 0.5);
-            finalColor = mix(finalColor, color2, accentVal * 0.4);
+            // Draw grid lines
+            vec2 grid = fract(pos);
+            float line_thickness = 0.05 + influence * 0.05;
+            float lines = smoothstep(line_thickness, 0.0, grid.x) + smoothstep(line_thickness, 0.0, grid.y);
             
-            // Apply grain
-            finalColor += grain;
+            // Glitch horizontal bands
+            float glitch_band = step(0.98, random(vec2(floor(st.y * 20.0), floor(u_time * 10.0))));
+            lines += glitch_band * 0.5;
             
-            // Vignette
-            float vignette = length(st - vec2(0.5));
-            finalColor *= smoothstep(1.2, 0.4, vignette);
+            // Color grading
+            vec3 bgColor = vec3(0.04, 0.04, 0.04);
+            // Deep red/orange for the wireframe
+            vec3 lineColor = vec3(1.0, 0.24, 0.0); // FF3D00 roughly
+            
+            // Intense red glow where fractured
+            vec3 glowColor = vec3(1.0, 0.1, 0.0) * influence * 0.5;
+            
+            // Base line color mixed with glitch
+            vec3 finalColor = mix(bgColor, lineColor, clamp(lines, 0.0, 1.0));
+            finalColor += glowColor;
+            
+            // Fade out to edges (Vignette)
+            float vignette = length(st - vec2(0.5 * (u_resolution.x/u_resolution.y), 0.5));
+            finalColor *= smoothstep(1.5, 0.3, vignette);
+
+            // Add grain
+            finalColor += random(st * u_time) * 0.08;
 
             gl_FragColor = vec4(finalColor, 1.0);
         }

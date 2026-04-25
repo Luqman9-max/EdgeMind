@@ -12,7 +12,7 @@ class BookController extends Controller
         $books = Book::where('is_published', true)
             ->orderBy('sort_order')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(12);
 
         return view('public.catalog', compact('books'));
     }
