@@ -148,11 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
         
-        // Hero Section Elements
-        gsap.to('.hero-title-main', {
-            scrollTrigger: { trigger: '.hero-title-main', start: 'top 80%' },
-            y: 0, opacity: 1, duration: 1, ease: 'power4.out'
-        });
+        // Hero Section Elements (Load Animation)
+        const heroTl = gsap.timeline({ delay: 0.2 });
+        heroTl.fromTo('.hero-tag', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
+              .fromTo('.hero-title', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power4.out' }, '-=0.4')
+              .fromTo('.hero-desc', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+              .fromTo('.hero-cta', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'back.out(1.5)' }, '-=0.4');
         
         // The Uncomfortable Truth
         gsap.to('.truth-text', {

@@ -39,10 +39,10 @@
 </section>
 
 {{-- 2. THE BREAKING POINT (Pinned Scroll Sequence) --}}
-<section id="breaking-point" class="bg-em-black relative overflow-hidden min-h-screen flex items-center border-t border-em-steel">
+<section id="breaking-point" class="bg-em-black relative overflow-hidden min-h-screen pt-32 lg:pt-40 border-t border-em-steel">
     <div class="scan-line-anim absolute inset-0 opacity-20 pointer-events-none z-0"></div>
     
-    <div class="container-edge relative z-10 w-full py-32">
+    <div class="container-edge relative z-10 w-full pb-48">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-16">
             
             {{-- Terminal Timestamp Side --}}
@@ -72,7 +72,7 @@
                     Motivation is a drug. It gives you a high, it wears off, and you crash harder. I didn't need another hit. I needed surgery.
                 </p>
                 
-                <div class="bp-quote opacity-0 transform translate-y-8 mt-24">
+                <div class="bp-quote opacity-0 transform translate-y-8 mt-24 mb-40 lg:mb-24">
                     <div class="w-full h-px bg-em-steel mb-12"></div>
                     <p class="font-primary font-black uppercase text-3xl md:text-5xl text-em-white leading-[1.1] tracking-tighter">
                         "I stopped trying to manage my feelings, and started <span class="text-em-accent glitch-text block" data-text="engineering my constraints.">engineering my constraints."</span>
@@ -394,7 +394,7 @@
         </p>
         
         <div class="slam-down w-full max-w-lg mx-auto" style="transition-delay: 300ms;">
-            <a href="{{ route('evolve') }}" class="block w-full bg-em-accent text-em-black font-black text-xl md:text-2xl uppercase tracking-widest py-6 md:py-8 hover:bg-em-white hover:scale-[1.02] transition-all duration-300 shadow-[0_0_40px_rgba(255,61,0,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]">
+            <a href="{{ route('evolve') }}" class="block w-full bg-em-accent !text-em-black font-black text-xl md:text-2xl uppercase tracking-widest py-6 md:py-8 hover:bg-em-white hover:!text-em-accent transition-all duration-300 shadow-[0_0_40px_rgba(255,61,0,0.3)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]">
                 VIEW THE ARSENAL
             </a>
             <a href="{{ route('contact') }}" class="block w-full mt-6 font-mono text-xs text-em-slate uppercase tracking-widest hover:text-em-white transition-colors pb-1 border-b border-transparent hover:border-em-slate inline-block">

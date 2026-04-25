@@ -374,18 +374,18 @@
 
             {{-- Text Labels --}}
             <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-1/3 text-left opacity-100 protocol-text pt-chaos">
-                <h4 class="font-black text-2xl mb-4 text-em-white uppercase tracking-widest border-l-4 border-em-steel pl-4">1. Fracture</h4>
-                <p class="text-sm text-em-slate leading-relaxed">Mental fog. Reactionary behavior. Living in the defensive position against notifications and impulses.</p>
+                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-white uppercase tracking-widest border-l-4 border-em-steel pl-4">1. Fracture</h4>
+                <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Mental fog. Reactionary behavior. Living in the defensive position against notifications and impulses.</p>
             </div>
 
-            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-full max-w-sm text-center opacity-0 protocol-text pt-forge">
-                <h4 class="font-black text-2xl mb-4 text-em-accent uppercase tracking-widest">2. The Forge</h4>
-                <p class="text-sm text-em-slate leading-relaxed">Installing the architecture. Deliberate discomfort. Removing destructive loops.</p>
+            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-full max-w-lg text-center opacity-0 protocol-text pt-forge">
+                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-accent uppercase tracking-widest">2. The Forge</h4>
+                <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Installing the architecture. Deliberate discomfort. Removing destructive loops.</p>
             </div>
 
             <div class="absolute top-1/2 right-0 transform -translate-y-1/2 w-1/3 text-right opacity-0 protocol-text pt-clarity">
-                <h4 class="font-black text-2xl mb-4 text-em-ice uppercase tracking-widest border-r-4 border-em-ice pr-4 shadow-em-ice">3. Clarity</h4>
-                <p class="text-sm text-em-slate leading-relaxed">Automatic execution. Cold focus. The noise disappears because the signal is too strong.</p>
+                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-ice uppercase tracking-widest border-r-4 border-em-ice pr-4 shadow-em-ice">3. Clarity</h4>
+                <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Automatic execution. Cold focus. The noise disappears because the signal is too strong.</p>
             </div>
         </div>
     </div>
