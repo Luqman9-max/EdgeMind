@@ -199,9 +199,9 @@
                 </div>
 
                 {{-- QA 1 --}}
-                <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-cloak class="min-h-[300px] flex flex-col justify-center relative z-10">
-                    <h4 class="text-2xl md:text-4xl font-black mb-12 text-center uppercase tracking-tight">What dictates your first hour awake?</h4>
-                    <div class="space-y-4 max-w-2xl mx-auto w-full">
+                <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-cloak class="min-h-[300px] flex flex-col justify-center items-center relative z-10 py-12">
+                    <h4 class="text-2xl md:text-4xl font-black text-center uppercase tracking-tight w-full" style="margin-bottom: 4rem;">What dictates your first hour awake?</h4>
+                    <div class="space-y-4 max-w-2xl w-full" style="margin-top: 2rem;">
                         <button @click="flash(); answers.push('device'); setTimeout(() => step = 2, 300);" class="w-full text-left p-6 border border-em-steel bg-em-black hover:border-em-accent transition-all group relative overflow-hidden">
                             <div class="absolute inset-0 bg-em-accent/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                             <span class="relative z-10 font-mono text-em-slate mr-4 group-hover:text-em-accent transition-colors">>_</span> 
@@ -216,9 +216,9 @@
                 </div>
 
                 {{-- QA 2 --}}
-                <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-cloak class="min-h-[300px] flex flex-col justify-center relative z-10">
-                    <h4 class="text-2xl md:text-4xl font-black mb-12 text-center uppercase tracking-tight">When a task becomes difficult, you typically:</h4>
-                    <div class="space-y-4 max-w-2xl mx-auto w-full">
+                <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-cloak class="min-h-[300px] flex flex-col justify-center items-center relative z-10 py-12">
+                    <h4 class="text-2xl md:text-4xl font-black text-center uppercase tracking-tight w-full" style="margin-bottom: 4rem;">When a task becomes difficult, you typically:</h4>
+                    <div class="space-y-4 max-w-2xl w-full" style="margin-top: 2rem;">
                         <button @click="flash(); answers.push('avoid'); setTimeout(() => step = 3, 300);" class="w-full text-left p-6 border border-em-steel bg-em-black hover:border-em-accent transition-all group relative overflow-hidden">
                             <div class="absolute inset-0 bg-em-accent/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                             <span class="relative z-10 font-mono text-em-slate mr-4 group-hover:text-em-accent transition-colors">>_</span> 
@@ -233,9 +233,9 @@
                 </div>
 
                 {{-- QA 3 --}}
-                <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-cloak class="min-h-[300px] flex flex-col justify-center relative z-10">
-                    <h4 class="text-2xl md:text-4xl font-black mb-12 text-center uppercase tracking-tight">Your goals for the last 6 months have:</h4>
-                    <div class="space-y-4 max-w-2xl mx-auto w-full">
+                <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-cloak class="min-h-[300px] flex flex-col justify-center items-center relative z-10 py-12">
+                    <h4 class="text-2xl md:text-4xl font-black text-center uppercase tracking-tight w-full" style="margin-bottom: 4rem;">Your goals for the last 6 months have:</h4>
+                    <div class="space-y-4 max-w-2xl w-full" style="margin-top: 2rem;">
                         <button @click="flash(); answers.push('stagnant'); result = 'FRAGILE SYSTEM'; setTimeout(() => step = 4, 300);" class="w-full text-left p-6 border border-em-steel bg-em-black hover:border-em-accent transition-all group relative overflow-hidden">
                             <div class="absolute inset-0 bg-em-accent/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
                             <span class="relative z-10 font-mono text-em-slate mr-4 group-hover:text-em-accent transition-colors">>_</span> 
@@ -348,14 +348,18 @@
 </section>
 
 {{-- 6. [NEW] THE CLARITY PROTOCOL (Before / After Journey) --}}
-<section class="py-32 bg-em-black relative overflow-hidden" id="protocol-pin-container">
-    <div class="container-edge relative z-10 h-full flex flex-col justify-center">
-        <div class="text-center mb-20 protocol-header opacity-0 transform translate-y-10">
-            <h2 class="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tight text-em-white">Phase Transition.</h2>
-            <p class="text-xl text-em-silver max-w-2xl mx-auto leading-relaxed">This is not motivation. This is the physiological transfer from chaos to order.</p>
-        </div>
+<section class="bg-em-black relative w-full h-[300vh]" id="protocol-pin-container">
+    {{-- Sticky Native Wrapper --}}
+    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-10 pb-10">
+        <div class="container-edge relative z-10 w-full flex flex-col items-center justify-center">
+            <div class="text-center mb-12 lg:mb-20 protocol-header opacity-0 transform translate-y-10 w-full flex flex-col items-center justify-center">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-black mb-4 uppercase tracking-tight text-em-white text-center w-full">Phase Transition.</h2>
+                <div class="text-lg md:text-xl text-em-silver max-w-2xl leading-relaxed text-center w-full" style="text-align: center !important;">
+                    This is not motivation. This is the physiological transfer from chaos to order.
+                </div>
+            </div>
 
-        <div class="relative max-w-5xl mx-auto w-full h-[400px] flex items-center justify-center" id="protocol-stage">
+            <div class="relative max-w-5xl mx-auto w-full h-[400px] flex items-center justify-center" id="protocol-stage">
             
             {{-- Stage Elements (Manipulated by GSAP) --}}
             <div class="absolute inset-0 flex items-center justify-center z-0 protocol-nodes">
@@ -388,6 +392,7 @@
                 <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Automatic execution. Cold focus. The noise disappears because the signal is too strong.</p>
             </div>
         </div>
+    </div>
     </div>
 </section>
 
