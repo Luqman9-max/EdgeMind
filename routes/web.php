@@ -33,6 +33,10 @@ Route::get('/evolve', [LeadController::class, 'evolve'])->name('evolve');
 Route::get('/lead-form', [LeadController::class, 'showForm'])->name('lead.form');
 Route::post('/lead-submit', [LeadController::class, 'submitForm'])->name('lead.submit');
 
+// DEV-ONLY: Reset lead gate cookies to simulate a fresh user
+// Automatically returns 404 in production (guarded inside the controller)
+Route::get('/lead-reset', [LeadController::class, 'resetGate'])->name('lead.reset');
+
 // Catalog / Portfolio (gated behind lead capture)
 Route::get('/catalog', [\App\Http\Controllers\Public\BookController::class, 'index'])->middleware('lead.captured')->name('catalog.index');
 Route::get('/book/{slug}', [\App\Http\Controllers\Public\BookController::class, 'show'])->name('book.show');
