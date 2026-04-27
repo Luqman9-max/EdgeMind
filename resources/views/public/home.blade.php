@@ -18,13 +18,13 @@
             </span>
         </div>
         
-        <h1 class="hero-title opacity-0 text-5xl md:text-7xl lg:text-[7rem] font-primary font-black text-em-white leading-[0.85] tracking-tighter mb-8 drop-shadow-2xl uppercase">
+        <h1 class="hero-title opacity-0 text-4xl sm:text-5xl md:text-7xl lg:text-[7rem] font-primary font-black text-em-white leading-[0.85] tracking-tighter mb-8 drop-shadow-2xl uppercase">
             Your Comfort<br />
             Zone Is A<br />
             <span class="text-em-accent inline-block glitch-intense mt-2" data-text="PRISON.">PRISON.</span>
         </h1>
         
-        <p class="hero-desc opacity-0 text-lg md:text-2xl font-body text-em-silver max-w-2xl mx-auto mb-16 leading-relaxed">
+        <p class="hero-desc opacity-0 text-lg md:text-2xl font-body text-em-silver max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16 leading-relaxed">
             Why does your life feel stuck? Because you've built a cage of convenience. We don't sell motivation here. We build systems that break you out.
         </p>
         
@@ -50,7 +50,7 @@
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
             <div class="truth-text opacity-0">
                 <p class="font-mono text-em-accent text-sm tracking-widest uppercase mb-6">> Diagnostic_01</p>
-                <h2 class="text-5xl md:text-7xl font-black mb-12 uppercase leading-none tracking-tight">The Signal<br /> Decay.</h2>
+                <h2 class="text-4xl sm:text-5xl md:text-7xl font-black mb-12 uppercase leading-none tracking-tight">The Signal<br /> Decay.</h2>
                 <div class="text-em-silver text-xl leading-relaxed">
                     <div class="space-y-6 mb-12 word-stagger">
                         <p>You have the potential. You know what you need to do. Every night you promise yourself tomorrow will be different. Every morning, the cycle repeats.</p>
@@ -92,7 +92,7 @@
 
     <div class="container-edge relative z-10 pt-16">
         <div class="mb-20 opacity-0 transform translate-y-10 flex flex-col items-center cost-header">
-            <h2 class="text-5xl md:text-7xl font-black text-em-white mb-6 uppercase tracking-tight text-center">The Mathematics of <br class="md:hidden"/><span class="text-em-accent">Regret.</span></h2>
+            <h2 class="text-4xl sm:text-5xl md:text-7xl font-black text-em-white mb-6 uppercase tracking-tight text-center">The Mathematics of <br class="md:hidden"/><span class="text-em-accent">Regret.</span></h2>
             <p class="text-xl text-em-silver max-w-2xl text-center">Look at the raw data. Inaction is not neutral. It is actively destroying your baseline.</p>
         </div>
 
@@ -102,7 +102,7 @@
                     <span>Lost Hours/Day</span>
                     <span class="w-2 h-2 bg-em-slate rounded-full animate-pulse group-hover:bg-em-accent"></span>
                 </div>
-                <div class="text-6xl md:text-7xl font-black text-em-white mb-4 font-primary group-hover:text-em-accent transition-colors">
+                <div class="text-4xl sm:text-5xl md:text-7xl font-black text-em-white mb-4 font-primary group-hover:text-em-accent transition-colors">
                     <span class="count-up" data-count="4.2">0</span>
                 </div>
                 <div class="w-full h-1 bg-em-steel mb-6 overflow-hidden">
@@ -118,7 +118,7 @@
                     <span>Yearly Deficit (Days)</span>
                     <span class="w-2 h-2 bg-em-slate rounded-full animate-pulse group-hover:bg-em-accent"></span>
                 </div>
-                <div class="text-6xl md:text-7xl font-black text-em-white mb-4 font-primary group-hover:text-em-accent transition-colors">
+                <div class="text-4xl sm:text-5xl md:text-7xl font-black text-em-white mb-4 font-primary group-hover:text-em-accent transition-colors">
                     <span class="count-up" data-count="63">0</span>
                 </div>
                 <div class="w-full h-1 bg-em-steel mb-6 overflow-hidden">
@@ -135,7 +135,7 @@
                     <span>Compound Effect</span>
                     <span class="w-2 h-2 bg-em-accent rounded-full shake-subtle"></span>
                 </div>
-                <div class="text-6xl md:text-7xl font-black text-em-white mb-4 font-primary group-hover:text-em-accent">
+                <div class="text-4xl sm:text-5xl md:text-7xl font-black text-em-white mb-4 font-primary group-hover:text-em-accent">
                     <span class="count-up glitch-text" data-count="100" data-infinite="true" data-text="Zero.">0</span>
                 </div>
                 <div class="w-full h-1 bg-em-steel mb-6 overflow-hidden">
@@ -359,10 +359,10 @@
                 </div>
             </div>
 
-            <div class="relative max-w-5xl mx-auto w-full h-[400px] flex items-center justify-center" id="protocol-stage">
+            <div class="relative max-w-5xl mx-auto w-full md:h-[400px] flex flex-col md:flex-row items-center justify-center gap-12 md:gap-0" id="protocol-stage">
             
             {{-- Stage Elements (Manipulated by GSAP) --}}
-            <div class="absolute inset-0 flex items-center justify-center z-0 protocol-nodes">
+            <div class="hidden md:flex absolute inset-0 items-center justify-center z-0 protocol-nodes">
                 {{-- Chaos nodes --}}
                 <div class="absolute w-16 h-16 border-2 border-em-steel border-dashed transform -translate-x-32 -translate-y-20 rotate-12 node chaos-node"></div>
                 <div class="absolute w-20 h-20 border-2 border-em-steel border-dashed transform translate-x-24 -translate-y-32 -rotate-12 node chaos-node"></div>
@@ -377,18 +377,18 @@
             </div>
 
             {{-- Text Labels --}}
-            <div class="absolute top-1/2 left-0 transform -translate-y-1/2 w-1/3 text-left opacity-100 protocol-text pt-chaos">
+            <div class="relative md:absolute w-full md:top-1/2 left-0 md:transform md:-translate-y-1/2 md:w-1/3 text-left md:opacity-100 protocol-text pt-chaos">
                 <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-white uppercase tracking-widest border-l-4 border-em-steel pl-4">1. Fracture</h4>
                 <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Mental fog. Reactionary behavior. Living in the defensive position against notifications and impulses.</p>
             </div>
 
-            <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-full max-w-lg text-center opacity-0 protocol-text pt-forge">
-                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-accent uppercase tracking-widest">2. The Forge</h4>
+            <div class="relative md:absolute md:bottom-0 left-1/2 md:transform md:-translate-x-1/2 md:translate-y-full w-full max-w-lg text-left md:text-center md:opacity-0 protocol-text pt-forge">
+                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-accent uppercase tracking-widest border-l-4 md:border-l-0 border-em-accent pl-4 md:pl-0">2. The Forge</h4>
                 <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Installing the architecture. Deliberate discomfort. Removing destructive loops.</p>
             </div>
 
-            <div class="absolute top-1/2 right-0 transform -translate-y-1/2 w-1/3 text-right opacity-0 protocol-text pt-clarity">
-                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-ice uppercase tracking-widest border-r-4 border-em-ice pr-4 shadow-em-ice">3. Clarity</h4>
+            <div class="relative md:absolute md:top-1/2 right-0 md:transform md:-translate-y-1/2 w-full md:w-1/3 text-left md:text-right md:opacity-0 protocol-text pt-clarity">
+                <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-ice uppercase tracking-widest border-l-4 md:border-l-0 md:border-r-4 border-em-ice pl-4 md:pl-0 md:pr-4 shadow-em-ice">3. Clarity</h4>
                 <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Automatic execution. Cold focus. The noise disappears because the signal is too strong.</p>
             </div>
         </div>
@@ -626,7 +626,7 @@
     <div class="container-edge relative z-10 flex flex-col items-center">
         <div class="font-mono text-em-accent tracking-[0.5em] text-xs mb-8 uppercase opacity-0 cta-element">> Final Warning</div>
         
-        <h2 class="text-6xl md:text-8xl lg:text-[10rem] font-black text-em-white mb-8 tracking-tighter uppercase leading-[0.8] drop-shadow-2xl opacity-0 cta-element">
+        <h2 class="text-4xl sm:text-5xl md:text-8xl lg:text-[10rem] font-black text-em-white mb-8 tracking-tighter uppercase leading-[0.8] drop-shadow-2xl opacity-0 cta-element">
             Cut The Noise.<br />
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-em-accent to-em-ice glitch-intense block mt-6" data-text="Or Bleed Out Slowly.">Or Bleed Out Slowly.</span>
         </h2>
@@ -637,7 +637,7 @@
 
         <div class="opacity-0 cta-element relative group">
             <div class="absolute -inset-4 bg-em-accent/30 rounded-lg blur-2xl group-hover:bg-em-accent/50 transition-colors duration-500 heartbeat"></div>
-            <a href="{{ route('evolve') }}" class="btn btn-primary btn-lg px-16 py-8 text-2xl tracking-widest uppercase font-black shadow-[0_0_60px_rgba(255,61,0,0.5)] hover:shadow-[0_0_120px_rgba(255,61,0,0.8)] bg-em-accent text-em-black border-2 border-em-accent hover:bg-em-white hover:border-em-white transition-all duration-300 transform hover:scale-110 active:scale-95 relative z-10">
+            <a href="{{ route('evolve') }}" class="btn btn-primary btn-lg px-8 py-5 text-lg sm:px-12 sm:py-6 sm:text-xl md:px-16 md:py-8 md:text-2xl tracking-wider md:tracking-widest uppercase font-black shadow-[0_0_60px_rgba(255,61,0,0.5)] hover:shadow-[0_0_120px_rgba(255,61,0,0.8)] bg-em-accent text-em-black border-2 border-em-accent hover:bg-em-white hover:border-em-white transition-all duration-300 transform hover:scale-110 active:scale-95 relative z-10 w-full sm:w-auto text-center">
                 INITIATE PROTOCOL
             </a>
             

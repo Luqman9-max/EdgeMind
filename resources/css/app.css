@@ -1605,3 +1605,39 @@ select.input-edge {
 .text-glow-subtle {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
+
+/* --- V4 Responsive Utilities --- */
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .glitch-intense::before,
+    .glitch-intense::after,
+    .glitch-text::before,
+    .glitch-text::after { display: none; }
+    .heartbeat, .shake-subtle, .pulse-glow { animation: none; }
+    .scan-line-anim::after { animation: none; }
+}
+
+/* Reduce animation complexity on mobile */
+@media (max-width: 768px) {
+    .glitch-intense::before,
+    .glitch-intense::after { animation-duration: 2s; }
+    .scan-line-anim::after { display: none; }
+    .cursor-spotlight { display: none; }
+    .noise-overlay::before { display: none; }
+}
+
+/* Mobile typography & spacing overrides */
+@media (max-width: 640px) {
+    .container-edge { padding: 0 1.25rem; }
+    section[class*="py-32"] { padding-top: 4rem; padding-bottom: 4rem; }
+    section[class*="py-40"] { padding-top: 5rem; padding-bottom: 5rem; }
+}
+
+/* Hide scrollbar for horizontal scroll areas */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

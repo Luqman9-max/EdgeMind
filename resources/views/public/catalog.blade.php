@@ -34,7 +34,7 @@
                     <div class="flex-1 h-px bg-gradient-to-r from-em-accent/50 to-transparent"></div>
                 </div>
                 
-                <h1 class="text-6xl sm:text-7xl md:text-[7rem] lg:text-[8rem] font-primary font-black text-em-white leading-[0.85] tracking-tighter mb-8 uppercase drop-shadow-2xl relative">
+                <h1 class="text-5xl sm:text-7xl md:text-[7rem] lg:text-[8rem] font-primary font-black text-em-white leading-[0.85] tracking-tighter mb-8 uppercase drop-shadow-2xl relative">
                     <div class="overflow-hidden"><div class="hero-word translate-y-full">THE</div></div>
                     <div class="overflow-hidden relative">
                         <div class="hero-word translate-y-full text-em-accent glitch-intense" data-text="ARSENAL.">ARSENAL.</div>
@@ -46,7 +46,7 @@
                     <p class="text-lg md:text-xl font-mono text-em-silver leading-relaxed">
                         System architecture for the intellectually aggressive. <br class="hidden md:block"/> Select your protocol. Execute the parameter.
                     </p>
-                    <div class="w-12 h-12 shrink-0 border border-em-steel flex items-center justify-center animate-[spin_10s_linear_infinite]">
+                    <div class="hidden sm:flex w-12 h-12 shrink-0 border border-em-steel items-center justify-center animate-[spin_10s_linear_infinite]">
                         <span class="material-symbols-outlined text-em-accent">settings_ethernet</span>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
         
         {{-- Controls Bar --}}
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 border-b border-em-steel pb-6 filter-bar opacity-0 translate-y-8">
-            <div class="flex flex-wrap gap-3 mb-6 md:mb-0">
+            <div class="flex flex-nowrap overflow-x-auto gap-2 sm:gap-3 mb-4 md:mb-0 pb-2 -mx-4 px-4 sm:-mx-0 sm:px-0 scrollbar-hide">
                 <button class="font-mono text-xs px-6 py-3 bg-em-black border border-em-accent text-em-accent uppercase tracking-widest hover:bg-em-accent hover:text-em-black transition-all duration-300 relative overflow-hidden group">
                     <span class="absolute inset-0 bg-em-accent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 z-0"></span>
                     <span class="relative z-10">All Protocols</span>
@@ -147,7 +147,7 @@
 
         {{-- Inventory Grid --}}
         @if($books->count() > 0)
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 lg:gap-y-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-10 md:gap-y-16 lg:gap-y-24">
             @foreach($books as $index => $book)
             <a href="{{ route('book.show', $book->slug) }}" class="dossier-item group block relative opacity-0 translate-y-16">
                 
@@ -157,12 +157,12 @@
                 </div>
 
                 {{-- Index Number HUD --}}
-                <div class="absolute -top-10 -left-2 md:-left-4 text-5xl md:text-7xl font-mono font-black text-em-steel/30 group-hover:text-em-accent/40 transition-colors z-20 pointer-events-none select-none">
+                <div class="absolute -top-6 sm:-top-10 -left-2 md:-left-4 text-3xl sm:text-5xl md:text-7xl font-mono font-black text-em-steel/30 group-hover:text-em-accent/40 transition-colors z-20 pointer-events-none select-none">
                     {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                 </div>
 
                 {{-- Image Container --}}
-                <div class="relative w-full aspect-[4/5] bg-em-gunmetal overflow-hidden border border-em-steel group-hover:border-em-accent transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:shadow-[0_20px_50px_rgba(255,61,0,0.15)] z-10">
+                <div class="relative w-full aspect-[4/3] sm:aspect-[4/5] bg-em-gunmetal overflow-hidden border border-em-steel group-hover:border-em-accent transition-colors duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:shadow-[0_20px_50px_rgba(255,61,0,0.15)] z-10">
                     
                     {{-- Decorative Corners --}}
                     <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-em-accent z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

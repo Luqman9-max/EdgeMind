@@ -6,7 +6,7 @@
 @section('content')
 
 {{-- Alpine Component for Cinematic Lead Form --}}
-<section x-data="leadForm()" x-init="init()" class="relative w-full min-h-screen bg-em-black overflow-hidden flex flex-col justify-center font-body pt-20 pb-20">
+<section x-data="leadForm()" x-init="init()" class="relative w-full min-h-screen bg-em-black overflow-hidden flex flex-col justify-center font-body pt-20 pb-24 sm:pb-20">
 
     {{-- Background Noise & Ambient --}}
     <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiMxMjEwMTAiPjwvcmVjdD48cGF0aCBkPSJNMCAwTDIgMk0wIDJMMiAwIiBzdHJva2U9IiMzMzMiLz48L3N2Zz4=')] opacity-30 z-0 mix-blend-overlay"></div>
@@ -48,7 +48,7 @@
         <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 max-w-7xl mx-auto items-center relative">
             
             {{-- Left Panel: Narrative --}}
-            <div class="lg:col-span-7 flex flex-col justify-center lead-panel-left relative">
+            <div class="lg:col-span-7 flex flex-col justify-center lead-panel-left relative order-2 lg:order-1 mt-8 lg:mt-0">
                 {{-- Decorative Line --}}
                 <div class="absolute -left-6 top-0 bottom-0 w-px bg-em-steel hidden lg:block left-line-anim"></div>
                 <div class="absolute -left-6 top-1/4 h-32 w-[3px] bg-em-accent hidden lg:block pulse-glow left-accent-anim"></div>
@@ -74,7 +74,7 @@
             </div>
 
             {{-- Right Panel: Form --}}
-            <div class="lg:col-span-5 relative lead-panel-right flex justify-end mt-12 lg:mt-0">
+            <div class="lg:col-span-5 relative lead-panel-right flex justify-end order-1 lg:order-2 mt-0 lg:mt-0">
                 
                 <div class="w-full max-w-md bg-em-black border-2 border-em-steel p-8 md:p-10 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] group hover:border-em-slate transition-colors duration-500 form-container">
                     
@@ -103,7 +103,7 @@
                                     placeholder="Enter identifier...">
                             </div>
                             @error('name')
-                                <p class="text-em-accent font-mono text-[10px] mt-2 uppercase tracking-widest"><span class="animate-pulse">!</span> {{ $message }}</p>
+                                <p class="text-em-accent font-mono text-xs sm:text-[10px] mt-2 uppercase tracking-wider sm:tracking-widest"><span class="animate-pulse">!</span> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -118,7 +118,7 @@
                                     placeholder="your@email.com">
                             </div>
                             @error('email')
-                                <p class="text-em-accent font-mono text-[10px] mt-2 uppercase tracking-widest"><span class="animate-pulse">!</span> {{ $message }}</p>
+                                <p class="text-em-accent font-mono text-xs sm:text-[10px] mt-2 uppercase tracking-wider sm:tracking-widest"><span class="animate-pulse">!</span> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -153,7 +153,7 @@
     </div>
 
     {{-- Lower Footer Bar --}}
-    <div x-show="phase >= 2" x-cloak class="absolute bottom-0 left-0 w-full h-12 border-t border-em-steel bg-em-black/80 backdrop-blur-md flex items-center justify-between px-6 lg:px-12 z-40 text-glow-subtle nav-footer-anim">
+    <div x-show="phase >= 2" x-cloak class="fixed bottom-0 left-0 w-full h-10 sm:h-12 border-t border-em-steel bg-em-black/80 backdrop-blur-md flex items-center justify-between px-6 lg:px-12 z-40 text-glow-subtle nav-footer-anim">
         <div class="font-primary font-black text-em-white tracking-widest uppercase text-sm">
             Edge<span class="text-em-accent">·</span>Mind
         </div>
