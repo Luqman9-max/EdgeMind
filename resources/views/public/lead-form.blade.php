@@ -48,7 +48,7 @@
         <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 max-w-7xl mx-auto items-center relative">
             
             {{-- Left Panel: Narrative --}}
-            <div class="lg:col-span-7 flex flex-col justify-center lead-panel-left relative order-2 lg:order-1 mt-8 lg:mt-0">
+            <div class="lg:col-span-7 flex flex-col justify-center lead-panel-left relative order-1 lg:order-1 mt-8 lg:mt-0">
                 {{-- Decorative Line --}}
                 <div class="absolute -left-6 top-0 bottom-0 w-px bg-em-steel hidden lg:block left-line-anim"></div>
                 <div class="absolute -left-6 top-1/4 h-32 w-[3px] bg-em-accent hidden lg:block pulse-glow left-accent-anim"></div>
@@ -58,7 +58,7 @@
                     Identity Extraction
                 </div>
 
-                <h1 class="text-4xl md:text-6xl lg:text-[5rem] font-black text-em-white leading-[0.9] tracking-tighter uppercase mb-10 text-glow-subtle narrative-elem">
+                <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-[5rem] font-black text-em-white leading-[0.9] tracking-tighter uppercase mb-6 sm:mb-10 text-glow-subtle narrative-elem">
                     Everyone who<br/>
                     closed this tab<br/>
                     stayed exactly<br/>
@@ -67,16 +67,16 @@
                     </span>
                 </h1>
 
-                <p class="text-xl md:text-2xl font-medium text-em-silver leading-relaxed max-w-xl narrative-elem border-l-2 border-em-steel pl-6 py-2">
+                <p class="text-lg sm:text-xl md:text-2xl font-medium text-em-silver leading-relaxed max-w-xl narrative-elem border-l-2 border-em-steel pl-4 sm:pl-6 py-2">
                     You're still here.<br/>
                     <span class="text-em-white">That means something.</span>
                 </p>
             </div>
 
             {{-- Right Panel: Form --}}
-            <div class="lg:col-span-5 relative lead-panel-right flex justify-end order-1 lg:order-2 mt-0 lg:mt-0">
+            <div class="lg:col-span-5 relative lead-panel-right flex justify-end order-2 lg:order-2 mt-0 lg:mt-0">
                 
-                <div class="w-full max-w-md bg-em-black border-2 border-em-steel p-8 md:p-10 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] group hover:border-em-slate transition-colors duration-500 form-container">
+                <div class="w-full max-w-md bg-em-black border-2 border-em-steel p-5 sm:p-8 md:p-10 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] group hover:border-em-slate transition-colors duration-500 form-container">
                     
                     {{-- Form Glitch Flash --}}
                     <div id="form-submit-flash" class="absolute inset-0 bg-em-accent/20 z-50 pointer-events-none opacity-0 transition-opacity duration-200"></div>
@@ -124,7 +124,7 @@
 
                         <div class="pt-6 relative form-group-anim" style="transition-delay: 200ms">
                             <button type="submit" 
-                                class="w-full relative overflow-hidden group bg-em-charcoal border border-em-accent text-em-accent font-mono text-xs md:text-sm font-bold uppercase tracking-[0.2em] py-5 px-6 transition-all duration-300 hover:bg-em-accent hover:text-em-black btn-authorize">
+                                class="w-full relative overflow-hidden group bg-em-charcoal border border-em-accent text-em-accent font-mono text-sm font-bold uppercase tracking-wider md:tracking-[0.2em] py-5 px-6 transition-all duration-300 hover:bg-em-accent hover:text-em-black btn-authorize">
                                 <span class="relative z-10 flex items-center justify-center gap-3">
                                     <span x-text="phase === 3 ? 'AUTHORIZATION CONFIRMED' : 'AUTHORIZE ACCESS'"></span>
                                     <span x-show="phase === 2" class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">lock_open</span>

@@ -1,24 +1,26 @@
-{{-- Edge Mind Home Hero WebGL Background --}}
+{{-- Edge Mind Home Hero WebGL Background (Redesigned) --}}
 <div class="absolute inset-0 z-0 overflow-hidden bg-em-black pointer-events-none">
     {{-- WebGL Canvas --}}
-    <canvas id="hero-noise-canvas" class="absolute inset-0 w-full h-full opacity-60"></canvas>
+    <canvas id="hero-sys-canvas" class="absolute inset-0 w-full h-full opacity-80"></canvas>
     
     {{-- Ambient Glow --}}
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-em-accent/10 rounded-full blur-[140px] mix-blend-screen opacity-50 parallax-glow" data-speed="0.05"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-em-accent/10 rounded-full blur-[140px] mix-blend-screen opacity-40 parallax-glow" data-speed="0.05"></div>
 
     {{-- Scanline overlay (CSS) --}}
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] opacity-30 z-10"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.4)_50%)] bg-[length:100%_4px] opacity-40 z-10 pointer-events-none"></div>
+    
+    {{-- Screen Edge Vignette --}}
+    <div class="absolute inset-0 shadow-[inset_0_0_150px_rgba(10,10,11,1)] z-10 pointer-events-none"></div>
 </div>
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('hero-noise-canvas');
+    const canvas = document.getElementById('hero-sys-canvas');
     if (!canvas) return;
 
     const gl = canvas.getContext('webgl');
     if (!gl) {
-        // Fallback if WebGL isn't supported
         canvas.style.display = 'none';
         return;
     }
@@ -31,88 +33,101 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
 
-    // Fragment Shader: procedural fractured mesh based on mouse
+    // Fragment Shader: Brutalist System Topography
     const fsSource = `
         precision mediump float;
         uniform vec2 u_resolution;
         uniform float u_time;
         uniform vec2 u_mouse;
 
-        // Random function
-        float random(vec2 st) {
-            return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+        // Hash function for noise
+        float hash(vec2 p) {
+            p = fract(p * vec2(123.34, 456.21));
+            p += dot(p, p + 45.32);
+            return fract(p.x * p.y);
         }
 
-        // 2D Noise based on Morgan McGuire @morgan3d
-        float noise (in vec2 st) {
-            vec2 i = floor(st);
-            vec2 f = fract(st);
+        // Value noise
+        float noise(vec2 x) {
+            vec2 i = floor(x);
+            vec2 f = fract(x);
+            f = f * f * (3.0 - 2.0 * f);
+            float a = hash(i);
+            float b = hash(i + vec2(1.0, 0.0));
+            float c = hash(i + vec2(0.0, 1.0));
+            float d = hash(i + vec2(1.0, 1.0));
+            return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+        }
 
-            float a = random(i);
-            float b = random(i + vec2(1.0, 0.0));
-            float c = random(i + vec2(0.0, 1.0));
-            float d = random(i + vec2(1.0, 1.0));
-
-            vec2 u = f * f * (3.0 - 2.0 * f);
-
-            return mix(a, b, u.x) +
-                    (c - a)* u.y * (1.0 - u.x) +
-                    (d - b) * u.x * u.y;
+        // Fractal Brownian Motion
+        float fbm(vec2 x) {
+            float v = 0.0;
+            float a = 0.5;
+            vec2 shift = vec2(100.0);
+            mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
+            for (int i = 0; i < 5; ++i) {
+                v += a * noise(x);
+                x = rot * x * 2.0 + shift;
+                a *= 0.5;
+            }
+            return v;
         }
 
         void main() {
-            vec2 st = gl_FragCoord.xy/u_resolution.xy;
-            st.x *= u_resolution.x/u_resolution.y;
+            vec2 st = gl_FragCoord.xy / u_resolution.xy;
+            st.x *= u_resolution.x / u_resolution.y;
+
+            // Mouse interaction
+            vec2 mousePos = u_mouse;
+            float distToMouse = length(st - mousePos);
+            float interaction = exp(-distToMouse * 3.0); // Intense localized field
+
+            // Grid coordinates
+            vec2 pos = st * 12.0; 
+            pos.y -= u_time * 1.5; // Flowing downwards
+
+            // Topographical elevation based on FBM
+            float elevation = fbm(pos * 0.5 + u_time * 0.1);
             
-            // Mouse distortion
-            vec2 mouse_dist = st - u_mouse;
-            float dist = length(mouse_dist);
-            float influence = smoothstep(0.6, 0.0, dist);
-            
-            // Add movement and distortion
-            vec2 pos = st * 15.0; // Grid scale
-            
-            // Apply noise-based distortion + mouse influence
-            float n = noise(pos * 0.2 + u_time * 0.2);
-            
-            // Fracture the grid where influence is high or noise is high
-            float fracture = influence * 2.0 + n * 0.5;
-            pos.x += noise(vec2(pos.y * 0.5, u_time)) * fracture;
-            pos.y += noise(vec2(pos.x * 0.5, u_time + 10.0)) * fracture;
-            
-            // Perspective transform (pseudo 3D floor)
-            pos.y /= max(0.1, (1.0 - st.y * 0.8));
-            pos.y -= u_time * 2.0; // Move forward
-            
-            // Draw grid lines
-            vec2 grid = fract(pos);
-            float line_thickness = 0.05 + influence * 0.05;
-            float lines = smoothstep(line_thickness, 0.0, grid.x) + smoothstep(line_thickness, 0.0, grid.y);
+            // Distort grid based on elevation & mouse
+            pos += elevation * 1.5;
+            pos += interaction * 0.5;
+
+            // Create contour lines
+            float contour = fract(elevation * 10.0);
+            float lineThickness = 0.05 + interaction * 0.1; // Thicker lines near mouse
+            float lines = smoothstep(lineThickness, 0.0, contour) + smoothstep(1.0 - lineThickness, 1.0, contour);
+
+            // Create vertical binary/data streaks
+            float streak = step(0.98, hash(vec2(floor(pos.x * 5.0), floor(pos.y + u_time * 5.0))));
             
             // Glitch horizontal bands
-            float glitch_band = step(0.98, random(vec2(floor(st.y * 20.0), floor(u_time * 10.0))));
-            lines += glitch_band * 0.5;
-            
-            // Color grading
+            float glitch = step(0.99, hash(vec2(floor(st.y * 30.0), u_time)));
+
+            // Color palette (Edge Mind system)
             vec3 bgColor = vec3(0.04, 0.04, 0.04);
-            // Deep red/orange for the wireframe
-            vec3 lineColor = vec3(1.0, 0.24, 0.0); // FF3D00 roughly
+            vec3 contourColor = vec3(0.16, 0.16, 0.2); // Steel grey
+            vec3 accentColor = vec3(1.0, 0.24, 0.0); // Accent #FF3D00
             
-            // Intense red glow where fractured
-            vec3 glowColor = vec3(1.0, 0.1, 0.0) * influence * 0.5;
+            vec3 color = bgColor;
             
-            // Base line color mixed with glitch
-            vec3 finalColor = mix(bgColor, lineColor, clamp(lines, 0.0, 1.0));
-            finalColor += glowColor;
+            // Apply contours
+            color = mix(color, contourColor, lines * 0.5);
             
-            // Fade out to edges (Vignette)
-            float vignette = length(st - vec2(0.5 * (u_resolution.x/u_resolution.y), 0.5));
-            finalColor *= smoothstep(1.5, 0.3, vignette);
+            // Apply data streaks
+            color = mix(color, accentColor, streak * 0.8);
+            
+            // Apply glitch
+            color = mix(color, accentColor, glitch * 0.6);
+            
+            // Mouse glow
+            color += accentColor * interaction * 0.3;
+            
+            // Vignette
+            float vignette = length(gl_FragCoord.xy / u_resolution.xy - 0.5);
+            color *= smoothstep(0.8, 0.2, vignette);
 
-            // Add grain
-            finalColor += random(st * u_time) * 0.08;
-
-            gl_FragColor = vec4(finalColor, 1.0);
+            gl_FragColor = vec4(color, 1.0);
         }
     `;
 
@@ -139,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gl.linkProgram(program);
     gl.useProgram(program);
 
-    // Geometry (Full screen quad)
+    // Geometry
     const vertices = new Float32Array([
         -1.0, -1.0,
          1.0, -1.0,
@@ -177,23 +192,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resize);
     resize();
 
-    // Mouse movement tracking
+    // Mouse movement
     window.addEventListener('mousemove', (e) => {
-        // Normalize mouse coordinates based on canvas ratio
         targetMouseX = e.clientX / window.innerWidth;
-        targetMouseY = 1.0 - (e.clientY / window.innerHeight); // Invert Y for WebGL
-        
-        // Adjust for aspect ratio
+        targetMouseY = 1.0 - (e.clientY / window.innerHeight); 
         targetMouseX *= window.innerWidth / window.innerHeight;
     });
 
-    // Parallax elements
     const parallaxGlow = document.querySelector('.parallax-glow');
 
     // Render loop
     let startTime = Date.now();
     function render() {
-        // Smooth mouse interpolation
         mouseX += (targetMouseX - mouseX) * 0.05;
         mouseY += (targetMouseY - mouseY) * 0.05;
 
@@ -202,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         gl.drawArrays(gl.TRIANGLES, 0, 6);
 
-        // Parallax updates
         if(parallaxGlow) {
             const parallaxX = (mouseX - window.innerWidth/window.innerHeight/2) * -50;
             const parallaxY = (mouseY - 0.5) * 50;

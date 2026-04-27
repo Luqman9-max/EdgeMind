@@ -1641,3 +1641,40 @@ select.input-edge {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* --- V3 Edge Mind Advanced GSAP Utilities --- */
+.screen-flash-hero {
+    position: fixed;
+    inset: 0;
+    background: var(--em-white);
+    z-index: 99999;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0;
+}
+
+.glow-pulse-intense {
+    animation: glowPulseIntense 2s infinite alternate;
+}
+@keyframes glowPulseIntense {
+    from { box-shadow: 0 0 20px rgba(255, 61, 0, 0.4); }
+    to { box-shadow: 0 0 60px rgba(255, 61, 0, 0.8); }
+}
+
+.line-draw-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    background: var(--em-accent);
+}
+
+.gs-3d-parallax-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.gs-3d-parallax-element {
+    will-change: transform;
+    transform-style: preserve-3d;
+}

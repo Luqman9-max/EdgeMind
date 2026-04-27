@@ -5,7 +5,7 @@
 
 @section('content')
 
-<section class="catalog-hero relative w-full min-h-[85vh] flex flex-col justify-center items-center pt-20 overflow-hidden bg-em-black border-b border-em-steel">
+<section class="catalog-hero relative w-full min-h-[60vh] sm:min-h-[85vh] flex flex-col justify-center items-center pt-20 overflow-hidden bg-em-black border-b border-em-steel">
     {{-- Massive Background Typography --}}
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-0 pointer-events-none opacity-5 select-none overflow-hidden">
         <div class="text-[15vw] font-primary font-black leading-none text-transparent tracking-tighter whitespace-nowrap" style="-webkit-text-stroke: 2px var(--em-white);">
@@ -20,7 +20,7 @@
         <div class="scan-line-anim absolute inset-0 opacity-30"></div>
     </div>
 
-    <div class="container-edge relative z-10 w-full mt-10">
+    <div class="container-edge relative z-10 w-full mt-4 sm:mt-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {{-- Left: Main Copy --}}
@@ -34,7 +34,7 @@
                     <div class="flex-1 h-px bg-gradient-to-r from-em-accent/50 to-transparent"></div>
                 </div>
                 
-                <h1 class="text-5xl sm:text-7xl md:text-[7rem] lg:text-[8rem] font-primary font-black text-em-white leading-[0.85] tracking-tighter mb-8 uppercase drop-shadow-2xl relative">
+                <h1 class="text-4xl sm:text-6xl md:text-[7rem] lg:text-[8rem] font-primary font-black text-em-white leading-[0.85] tracking-tighter mb-8 uppercase drop-shadow-2xl relative">
                     <div class="overflow-hidden"><div class="hero-word translate-y-full">THE</div></div>
                     <div class="overflow-hidden relative">
                         <div class="hero-word translate-y-full text-em-accent glitch-intense" data-text="ARSENAL.">ARSENAL.</div>
@@ -116,25 +116,25 @@
 </section>
 
 {{-- 2. CATALOG GRID & FILTERS --}}
-<section class="py-24 bg-em-charcoal min-h-screen relative z-10 border-t border-em-steel" id="inventory">
+<section class="py-12 sm:py-16 md:py-24 bg-em-charcoal min-h-screen relative z-10 border-t border-em-steel" id="inventory">
     <div class="container-edge">
         
         {{-- Controls Bar --}}
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 border-b border-em-steel pb-6 filter-bar opacity-0 translate-y-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-16 border-b border-em-steel pb-6 filter-bar opacity-0 translate-y-8">
             <div class="flex flex-nowrap overflow-x-auto gap-2 sm:gap-3 mb-4 md:mb-0 pb-2 -mx-4 px-4 sm:-mx-0 sm:px-0 scrollbar-hide">
-                <button class="font-mono text-xs px-6 py-3 bg-em-black border border-em-accent text-em-accent uppercase tracking-widest hover:bg-em-accent hover:text-em-black transition-all duration-300 relative overflow-hidden group">
+                <button class="font-mono text-xs px-3 py-2 sm:px-6 sm:py-3 bg-em-black border border-em-accent text-em-accent uppercase tracking-widest hover:bg-em-accent hover:text-em-black transition-all duration-300 relative overflow-hidden group">
                     <span class="absolute inset-0 bg-em-accent transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 z-0"></span>
                     <span class="relative z-10">All Protocols</span>
                 </button>
-                <button class="font-mono text-xs px-6 py-3 bg-transparent border border-em-steel text-em-slate uppercase tracking-widest hover:border-em-white hover:text-em-white transition-all duration-300 relative overflow-hidden group">
+                <button class="font-mono text-xs px-3 py-2 sm:px-6 sm:py-3 bg-transparent border border-em-steel text-em-slate uppercase tracking-widest hover:border-em-white hover:text-em-white transition-all duration-300 relative overflow-hidden group">
                     <span class="absolute inset-0 bg-em-white transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 z-0"></span>
                     <span class="relative z-10 group-hover:text-em-black transition-colors">Vol I</span>
                 </button>
-                <button class="font-mono text-xs px-6 py-3 bg-transparent border border-em-steel text-em-slate uppercase tracking-widest hover:border-em-white hover:text-em-white transition-all duration-300 relative overflow-hidden group">
+                <button class="font-mono text-xs px-3 py-2 sm:px-6 sm:py-3 bg-transparent border border-em-steel text-em-slate uppercase tracking-widest hover:border-em-white hover:text-em-white transition-all duration-300 relative overflow-hidden group">
                     <span class="absolute inset-0 bg-em-white transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 z-0"></span>
                     <span class="relative z-10 group-hover:text-em-black transition-colors">Vol II</span>
                 </button>
-                <button class="font-mono text-xs px-6 py-3 bg-transparent border border-em-steel text-em-slate uppercase tracking-widest hover:border-em-white hover:text-em-white transition-all duration-300 relative overflow-hidden group">
+                <button class="font-mono text-xs px-3 py-2 sm:px-6 sm:py-3 bg-transparent border border-em-steel text-em-slate uppercase tracking-widest hover:border-em-white hover:text-em-white transition-all duration-300 relative overflow-hidden group">
                     <span class="absolute inset-0 bg-em-white transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 z-0"></span>
                     <span class="relative z-10 group-hover:text-em-black transition-colors">Vol III</span>
                 </button>
@@ -157,7 +157,7 @@
                 </div>
 
                 {{-- Index Number HUD --}}
-                <div class="absolute -top-6 sm:-top-10 -left-2 md:-left-4 text-3xl sm:text-5xl md:text-7xl font-mono font-black text-em-steel/30 group-hover:text-em-accent/40 transition-colors z-20 pointer-events-none select-none">
+                <div class="absolute -top-4 sm:-top-10 -left-1 md:-left-4 text-2xl sm:text-5xl md:text-7xl font-mono font-black text-em-steel/30 group-hover:text-em-accent/40 transition-colors z-20 pointer-events-none select-none">
                     {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
                 </div>
 
@@ -203,7 +203,7 @@
                 
                 {{-- Book Meta (Outside image) --}}
                 <div class="pt-6 flex flex-col relative z-10 pl-2">
-                    <h3 class="text-3xl font-black text-em-white mb-4 leading-none uppercase tracking-tight group-hover:text-em-accent transition-colors duration-300">{{ $book->title }}</h3>
+                    <h3 class="text-2xl sm:text-3xl font-black text-em-white mb-4 leading-none uppercase tracking-tight group-hover:text-em-accent transition-colors duration-300">{{ $book->title }}</h3>
                     
                     <div class="flex items-end justify-between border-t border-em-steel pt-4 mt-auto">
                         <div class="font-mono">
@@ -226,7 +226,7 @@
         </div>
 
         {{-- Custom Pagination --}}
-        <div class="mt-24 flex justify-center w-full pagination-wrapper opacity-0 translate-y-8">
+        <div class="mt-12 sm:mt-16 md:mt-24 flex justify-center w-full pagination-wrapper opacity-0 translate-y-8">
             {{ $books->links('public.components.pagination') }}
         </div>
 
@@ -234,7 +234,7 @@
         <div class="flex flex-col items-center justify-center py-40 border border-em-steel border-dashed bg-em-black relative overflow-hidden group">
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-em-accent/5 to-transparent w-[200%] animate-[scanSweep_3s_linear_infinite] pointer-events-none mix-blend-screen"></div>
             <span class="material-symbols-outlined text-6xl text-em-slate mb-6 animate-pulse">lock</span>
-            <h3 class="text-3xl font-black text-em-white mb-2 uppercase tracking-tight">Vault Empty</h3>
+            <h3 class="text-2xl sm:text-3xl font-black text-em-white mb-2 uppercase tracking-tight">Vault Empty</h3>
             <p class="font-mono text-em-slate text-sm uppercase tracking-widest">> No protocols matched the criteria_</p>
         </div>
         @endif
