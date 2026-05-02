@@ -123,27 +123,27 @@
                 </div>
 
                 {{-- Price & CTA --}}
-                <div class="detail-stagger opacity-0 transform translate-y-4 border-t border-em-steel pt-10 mt-auto flex flex-col sm:flex-row sm:items-center justify-between gap-8">
-                    <div class="flex flex-col">
-                        <span class="font-mono text-xs text-em-slate uppercase tracking-widest mb-2">Acquisition Required</span>
+                <div class="detail-stagger opacity-0 transform translate-y-4 border-t border-em-steel pt-10 mt-auto flex flex-row items-center justify-between gap-4 sm:gap-8">
+                    <div class="flex flex-col shrink-0">
+                        <span class="font-mono text-[9px] sm:text-xs text-em-slate uppercase tracking-widest mb-2">Acquisition Required</span>
                         @if($book->is_free)
-                            <span class="font-primary text-4xl font-black text-em-white uppercase tracking-tight">OPEN ACCESS</span>
+                            <span class="font-primary text-2xl sm:text-4xl font-black text-em-white uppercase tracking-tight">OPEN ACCESS</span>
                         @elseif($book->price)
-                            <span class="font-primary text-5xl font-black text-em-accent leading-none">${{ number_format($book->price, 2) }}</span>
+                            <span class="font-primary text-3xl sm:text-5xl font-black text-em-accent leading-none">${{ number_format($book->price, 2) }}</span>
                         @endif
                     </div>
 
                     @if($book->gumroad_url)
-                        <div class="flex flex-col items-start sm:items-end w-full sm:w-auto relative group">
+                        <div class="flex flex-col items-end relative group">
                             <div class="absolute -inset-2 bg-em-accent/20 blur-xl rounded-full group-hover:bg-em-accent/40 transition-colors duration-500 z-0"></div>
-                            <a href="{{ $book->gumroad_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg w-full sm:w-auto relative z-10 px-10 py-5 text-xl tracking-widest font-bold shadow-[0_0_30px_rgba(255,61,0,0.3)] bg-em-accent text-em-black border-2 border-em-accent hover:bg-em-white hover:border-em-white transition-all overflow-hidden">
+                            <a href="{{ $book->gumroad_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary relative z-10 px-4 py-3 text-xs sm:px-10 sm:py-5 sm:text-xl tracking-widest font-bold shadow-[0_0_30px_rgba(255,61,0,0.3)] bg-em-accent text-em-black border-2 border-em-accent hover:bg-em-white hover:border-em-white transition-all overflow-hidden whitespace-nowrap">
                                 <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] pointer-events-none z-20 mix-blend-overlay"></div>
-                                <span class="relative z-30 flex items-center justify-center gap-3">
-                                    {{ $book->is_free ? 'DOWNLOAD SECURELY' : 'ACQUIRE PROTOCOL' }} 
-                                    <span class="material-symbols-outlined">system_update_alt</span>
+                                <span class="relative z-30 flex items-center justify-center gap-2 sm:gap-3">
+                                    {{ $book->is_free ? 'DOWNLOAD' : 'ACQUIRE' }} 
+                                    <span class="material-symbols-outlined text-base sm:text-2xl">system_update_alt</span>
                                 </span>
                             </a>
-                            <span class="font-mono text-[10px] text-em-slate uppercase mt-4 tracking-widest text-center sm:text-right w-full">Connection secure. Direct transfer.</span>
+                            <span class="font-mono text-[9px] sm:text-[10px] text-em-slate uppercase mt-2 sm:mt-4 tracking-widest text-right hidden sm:block">Connection secure. Direct transfer.</span>
                         </div>
                     @endif
                 </div>

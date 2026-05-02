@@ -385,15 +385,21 @@ a:hover {
 .mobile-menu {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background: rgba(10, 10, 11, 0.98);
     backdrop-filter: blur(20px);
-    z-index: 10;
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s var(--ease-sharp);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu.open {
@@ -1604,4 +1610,124 @@ select.input-edge {
 
 .text-glow-subtle {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* --- V4 Responsive Utilities --- */
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .glitch-intense::before,
+    .glitch-intense::after,
+    .glitch-text::before,
+    .glitch-text::after { display: none; }
+    .heartbeat, .shake-subtle, .pulse-glow { animation: none; }
+    .scan-line-anim::after { animation: none; }
+}
+
+/* Reduce animation complexity on mobile */
+@media (max-width: 768px) {
+    .glitch-intense::before,
+    .glitch-intense::after { animation-duration: 2s; }
+    .scan-line-anim::after { display: none; }
+    .cursor-spotlight { display: none; }
+    .noise-overlay::before { display: none; }
+}
+
+/* Mobile typography & spacing overrides */
+@media (max-width: 640px) {
+    .container-edge { padding: 0 1.25rem; }
+    section[class*="py-32"] { padding-top: 4rem; padding-bottom: 4rem; }
+    section[class*="py-40"] { padding-top: 5rem; padding-bottom: 5rem; }
+
+    /* Section 3 (Cost) — vertically center content */
+    #cost .container-edge {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: auto;
+    }
+
+    /* Section 4 (Diagnostic) — vertically center content */
+    #diagnostic .container-edge {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: auto;
+    }
+
+    /* Section 6 (Phase Transition) — fix "The Forge" text overflow */
+    #protocol-stage .pt-forge {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+    #protocol-stage .pt-forge p {
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    /* Section 10 (Final CTA) — reduce button & countdown */
+    #final-cta .gs-cta-btn .btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+    }
+    #final-cta .gs-cta-btn .countdown {
+        font-size: 0.65rem;
+    }
+    #final-cta .gs-cta-btn > div:last-child {
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+    }
+
+    /* Catalog — reduce gap before footer */
+    .pagination-wrapper {
+        margin-top: 2rem;
+    }
+}
+
+/* Hide scrollbar for horizontal scroll areas */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* --- V3 Edge Mind Advanced GSAP Utilities --- */
+.screen-flash-hero {
+    position: fixed;
+    inset: 0;
+    background: var(--em-white);
+    z-index: 99999;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    opacity: 0;
+}
+
+.glow-pulse-intense {
+    animation: glowPulseIntense 2s infinite alternate;
+}
+@keyframes glowPulseIntense {
+    from { box-shadow: 0 0 20px rgba(255, 61, 0, 0.4); }
+    to { box-shadow: 0 0 60px rgba(255, 61, 0, 0.8); }
+}
+
+.line-draw-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    background: var(--em-accent);
+}
+
+.gs-3d-parallax-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.gs-3d-parallax-element {
+    will-change: transform;
+    transform-style: preserve-3d;
 }
