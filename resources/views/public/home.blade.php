@@ -97,7 +97,7 @@
 </section>
 
 {{-- 3. THE COST OF STAYING COMFORTABLE --}}
-<section id="cost" class="py-16 sm:py-20 md:py-32 bg-em-charcoal relative border-y border-em-steel overflow-hidden cost-section">
+<section id="cost" class="py-16 sm:py-20 md:py-32 bg-em-charcoal relative border-y border-em-steel overflow-hidden cost-section min-h-screen sm:min-h-0 flex flex-col justify-center">
     {{-- Data Stream Background --}}
     <div class="absolute top-0 left-0 w-[200%] h-10 bg-em-black border-b border-em-steel flex items-center overflow-hidden z-0">
         <div class="font-mono text-xs text-em-accent whitespace-nowrap opacity-50 flex animate-[scanSweep_10s_linear_infinite]" style="animation-direction: alternate;">
@@ -165,7 +165,7 @@
 </section>
 
 {{-- 4. [NEW] THE EDGE MIND DIAGNOSTIC --}}
-<section id="diagnostic" class="py-16 sm:py-20 md:py-32 bg-em-black relative overflow-hidden">
+<section id="diagnostic" class="py-16 sm:py-20 md:py-32 bg-em-black relative overflow-hidden min-h-screen sm:min-h-0 flex flex-col justify-center">
     <div class="container-edge">
         <div class="max-w-4xl mx-auto bg-em-gunmetal border border-em-steel p-1 md:p-2 slam-down shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative group hover:border-em-slate transition-colors duration-500 diagnostic-container gs-diag-container opacity-0">
             {{-- CRT Scanline overlay --}}
@@ -289,12 +289,12 @@
 </section>
 
 {{-- 5. PRODUCT SHOWCASE: "The Arsenal" --}}
-<section id="arsenal" class="py-16 sm:py-20 md:py-32 bg-em-charcoal border-y border-em-steel overflow-hidden relative perspective-1000">
+<section id="arsenal" class="py-16 sm:py-20 md:py-32 bg-em-charcoal border-y border-em-steel overflow-hidden relative perspective-1000 min-h-screen sm:min-h-0 flex flex-col justify-center">
     <div class="container-edge relative">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[500px] bg-em-black z-0 opacity-50 blur-[100px] rounded-full pointer-events-none"></div>
         
-        <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-20 relative z-10 opacity-0 transform translate-y-10 arsenal-header gs-arsenal-header">
-            <div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-20 relative z-10 opacity-0 transform translate-y-10 arsenal-header gs-arsenal-header">
+            <div class="text-left">
                 <span class="font-mono text-xs text-em-slate tracking-widest uppercase block mb-2 flex items-center gap-2">
                     <span class="w-1.5 h-1.5 bg-em-ice rounded-full animate-pulse"></span> Inventory
                 </span>
@@ -356,8 +356,8 @@
             @endforelse
         </div>
         
-        <div class="mt-12 text-center md:hidden">
-            <a href="{{ route('evolve') }}" class="btn btn-outline w-full justify-center text-em-silver hover:text-em-accent hover:border-em-accent">VIEW ALL MODULES</a>
+        <div class="mt-12 text-right md:text-center md:hidden">
+            <a href="{{ route('evolve') }}" class="btn btn-outline inline-flex justify-center text-em-silver hover:text-em-accent hover:border-em-accent">VIEW ALL MODULES</a>
         </div>
     </div>
 </section>
@@ -377,18 +377,18 @@
             <div class="relative max-w-5xl mx-auto w-full md:h-[400px] flex flex-col md:flex-row items-center justify-center gap-12 md:gap-0" id="protocol-stage">
             
             {{-- Stage Elements (Manipulated by GSAP) --}}
-            <div class="hidden md:flex absolute inset-0 items-center justify-center z-0 protocol-nodes">
+            <div class="flex absolute inset-0 items-center justify-center z-0 protocol-nodes">
                 {{-- Chaos nodes --}}
-                <div class="absolute w-16 h-16 border-2 border-em-steel border-dashed transform -translate-x-32 -translate-y-20 rotate-12 node chaos-node"></div>
-                <div class="absolute w-20 h-20 border-2 border-em-steel border-dashed transform translate-x-24 -translate-y-32 -rotate-12 node chaos-node"></div>
-                <div class="absolute w-12 h-12 border-2 border-em-steel border-dashed transform -translate-x-40 translate-y-16 rotate-45 node chaos-node"></div>
-                <div class="absolute w-24 h-24 border-2 border-em-steel border-dashed transform translate-x-32 translate-y-20 -rotate-6 node chaos-node"></div>
+                <div class="absolute w-8 h-8 md:w-16 md:h-16 border-2 border-em-steel border-dashed transform -translate-x-16 md:-translate-x-32 -translate-y-10 md:-translate-y-20 rotate-12 node chaos-node"></div>
+                <div class="absolute w-10 h-10 md:w-20 md:h-20 border-2 border-em-steel border-dashed transform translate-x-12 md:translate-x-24 -translate-y-16 md:-translate-y-32 -rotate-12 node chaos-node"></div>
+                <div class="absolute w-6 h-6 md:w-12 md:h-12 border-2 border-em-steel border-dashed transform -translate-x-20 md:-translate-x-40 translate-y-8 md:translate-y-16 rotate-45 node chaos-node"></div>
+                <div class="absolute w-12 h-12 md:w-24 md:h-24 border-2 border-em-steel border-dashed transform translate-x-16 md:translate-x-32 translate-y-10 md:translate-y-20 -rotate-6 node chaos-node"></div>
                 
                 {{-- Central structure element --}}
-                <div class="absolute w-40 h-40 border-4 border-em-accent opacity-0 scale-50 node forge-node shadow-[0_0_40px_rgba(255,61,0,0.3)]"></div>
+                <div class="absolute w-20 h-20 md:w-40 md:h-40 border-4 border-em-accent opacity-0 scale-50 node forge-node shadow-[0_0_40px_rgba(255,61,0,0.3)]"></div>
                 
                 {{-- Final clarity ring --}}
-                <div class="absolute w-48 h-48 rounded-full border-4 border-em-ice opacity-0 scale-150 node clarity-node shadow-[0_0_60px_rgba(0,212,255,0.4)]"></div>
+                <div class="absolute w-24 h-24 md:w-48 md:h-48 rounded-full border-4 border-em-ice opacity-0 scale-150 node clarity-node shadow-[0_0_60px_rgba(0,212,255,0.4)]"></div>
             </div>
 
             {{-- Text Labels --}}
@@ -397,9 +397,9 @@
                 <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Mental fog. Reactionary behavior. Living in the defensive position against notifications and impulses.</p>
             </div>
 
-            <div class="relative md:absolute md:bottom-0 left-1/2 md:transform md:-translate-x-1/2 md:translate-y-full w-full max-w-lg text-left md:text-center md:opacity-0 protocol-text pt-forge">
+            <div class="relative md:absolute md:bottom-0 left-1/2 md:transform md:-translate-x-1/2 md:translate-y-full w-full max-w-lg text-left md:text-center md:opacity-0 protocol-text pt-forge px-2 sm:px-0">
                 <h4 class="font-black text-3xl lg:text-4xl mb-4 text-em-accent uppercase tracking-widest border-l-4 md:border-l-0 border-em-accent pl-4 md:pl-0">2. The Forge</h4>
-                <p class="text-lg lg:text-xl text-em-slate leading-relaxed">Installing the architecture. Deliberate discomfort. Removing destructive loops.</p>
+                <p class="text-base sm:text-lg lg:text-xl text-em-slate leading-relaxed break-words">Installing the architecture. Deliberate discomfort. Removing destructive loops.</p>
             </div>
 
             <div class="relative md:absolute md:top-1/2 right-0 md:transform md:-translate-y-1/2 w-full md:w-1/3 text-left md:text-right md:opacity-0 protocol-text pt-clarity">
@@ -652,14 +652,14 @@
 
         <div class="opacity-0 cta-element gs-cta-btn relative group">
             <div class="absolute -inset-4 bg-em-accent/30 rounded-lg blur-2xl group-hover:bg-em-accent/50 transition-colors duration-500 heartbeat"></div>
-            <a href="{{ route('evolve') }}" class="btn btn-primary btn-lg px-8 py-5 text-lg sm:px-12 sm:py-6 sm:text-xl md:px-16 md:py-8 md:text-2xl tracking-wider md:tracking-widest uppercase font-black shadow-[0_0_60px_rgba(255,61,0,0.5)] hover:shadow-[0_0_120px_rgba(255,61,0,0.8)] bg-em-accent text-em-black border-2 border-em-accent hover:bg-em-white hover:border-em-white transition-all duration-300 transform hover:scale-110 active:scale-95 relative z-10 w-full sm:w-auto text-center">
+            <a href="{{ route('evolve') }}" class="btn btn-primary btn-lg px-6 py-4 text-sm sm:px-12 sm:py-6 sm:text-xl md:px-16 md:py-8 md:text-2xl tracking-wider md:tracking-widest uppercase font-black shadow-[0_0_60px_rgba(255,61,0,0.5)] hover:shadow-[0_0_120px_rgba(255,61,0,0.8)] bg-em-accent text-em-black border-2 border-em-accent hover:bg-em-white hover:border-em-white transition-all duration-300 transform hover:scale-110 active:scale-95 relative z-10 w-full sm:w-auto text-center flex items-center justify-center">
                 INITIATE PROTOCOL
             </a>
             
-            <div class="mt-12 font-mono text-xs text-em-accent uppercase tracking-[0.3em] flex items-center justify-center gap-4">
-                <span class="w-16 h-[1px] bg-em-accent/50"></span> 
+            <div class="mt-8 sm:mt-12 font-mono text-[10px] sm:text-xs text-em-accent uppercase tracking-[0.2em] sm:tracking-[0.3em] flex items-center justify-center gap-2 sm:gap-4">
+                <span class="w-8 sm:w-16 h-[1px] bg-em-accent/50"></span> 
                 Systems closing in: <span class="countdown text-em-white">00:00</span> 
-                <span class="w-16 h-[1px] bg-em-accent/50"></span>
+                <span class="w-8 sm:w-16 h-[1px] bg-em-accent/50"></span>
             </div>
         </div>
     </div>
@@ -884,8 +884,21 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         });
         
-        // Mobile Simple Fade In
+        // Mobile Simple Fade In + Nodes Animation
         mm.add("(max-width: 767px)", () => {
+            // Animate chaos nodes on mobile
+            gsap.fromTo('.chaos-node', 
+                { opacity: 0, scale: 0.5 },
+                {
+                    scrollTrigger: {
+                        trigger: '#protocol-stage',
+                        start: 'top 85%',
+                    },
+                    opacity: 1, scale: 1, duration: 0.6, stagger: 0.1, ease: 'back.out(1.5)'
+                }
+            );
+
+            // Animate text labels
             gsap.fromTo('.protocol-text', 
                 { opacity: 0, y: 30 },
                 {

@@ -116,7 +116,7 @@
 </section>
 
 {{-- 2. CATALOG GRID & FILTERS --}}
-<section class="py-12 sm:py-16 md:py-24 bg-em-charcoal min-h-screen relative z-10 border-t border-em-steel" id="inventory">
+<section class="py-8 sm:py-16 md:py-24 pb-6 sm:pb-16 md:pb-24 bg-em-charcoal min-h-screen relative z-10 border-t border-em-steel" id="inventory">
     <div class="container-edge">
         
         {{-- Controls Bar --}}
@@ -226,7 +226,7 @@
         </div>
 
         {{-- Custom Pagination --}}
-        <div class="mt-12 sm:mt-16 md:mt-24 flex justify-center w-full pagination-wrapper opacity-0 translate-y-8">
+        <div class="mt-8 sm:mt-16 md:mt-24 flex justify-center w-full pagination-wrapper opacity-0 translate-y-8">
             {{ $books->links('public.components.pagination') }}
         </div>
 
