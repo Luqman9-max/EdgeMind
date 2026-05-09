@@ -151,20 +151,30 @@
                     <div></div>
                 </div>
 
-                @if(session('success'))
-                    <div class="bg-em-ice/10 border-b border-em-ice text-em-ice px-6 py-4 font-mono text-sm uppercase">
-                        > TRANSMISSION LOGGED: {{ now()->format('H:i:s') }}
+                <div x-data="contactTerminal()" x-cloak>
+                    <!-- Status Messages -->
+                    <div x-show="status === 'success'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" style="display: none;">
+                        <div class="bg-em-ice/10 border-b border-em-ice text-em-ice px-6 py-4 font-mono text-sm uppercase flex items-center justify-between">
+                            <span>> TRANSMISSION LOGGED: SIGNAL ACQUIRED.</span>
+                            <button type="button" @click="resetForm()" class="text-em-ice hover:text-white transition-colors">[RESET]</button>
+                        </div>
                     </div>
-                @endif
+                    
+                    <div x-show="status === 'error'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" style="display: none;">
+                        <div class="bg-em-accent/10 border-b border-em-accent text-em-accent px-6 py-4 font-mono text-sm uppercase flex items-center justify-between">
+                            <span>> ERROR: <span x-text="errorMessage"></span></span>
+                            <button type="button" @click="status = 'idle'" class="text-em-accent hover:text-white transition-colors">[X]</button>
+                        </div>
+                    </div>
 
-                <div class="p-8 md:p-12 relative overflow-hidden">
-                    {{-- Minimal ambient noise in terminal --}}
-                    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9InRyYW5zcGFyZW50Ij48L3JlY3Q+PHBhdGggZD0iTTAgMEwyIDJNMCAyTDIgMCIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+PC9zdmc+')] opacity-50 z-0 pointer-events-none"></div>
+                    <div class="p-8 md:p-12 relative overflow-hidden transition-all duration-500" :class="{'opacity-30 pointer-events-none grayscale': status === 'success'}">
+                        {{-- Minimal ambient noise in terminal --}}
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9InRyYW5zcGFyZW50Ij48L3JlY3Q+PHBhdGggZD0iTTAgMEwyIDJNMCAyTDIgMCIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+PC9zdmc+')] opacity-50 z-0 pointer-events-none"></div>
 
-                    <form action="{{ route('contact.submit') }}" method="POST" class="space-y-10 relative z-10" id="transmit-form">
-                        @csrf
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <form @submit.prevent="submitForm" class="space-y-10 relative z-10" id="transmit-form" x-ref="form">
+                            @csrf
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div class="group/input relative pb-2">
                                 <label for="name" class="font-mono text-[10px] text-em-slate uppercase tracking-[0.2em] block mb-2 transition-colors duration-300 group-focus-within/input:text-em-accent">>> OPERATOR_IDENTITY</label>
                                 <input type="text" name="name" id="name" required class="w-full bg-transparent border-0 border-b-2 border-em-steel px-0 py-2 text-em-white font-mono text-lg focus:ring-0 placeholder:text-em-slate/40 transition-colors" placeholder="_CALLSIGN">
@@ -208,22 +218,23 @@
                         {{-- Footer Action Bar --}}
                         <div class="flex flex-col md:flex-row items-center justify-between border-t-2 border-dashed border-em-steel pt-6 gap-6">
                             <div class="font-mono text-[10px] text-em-slate w-full md:w-auto text-left">
-                                <span class="animate-pulse inline-block mr-2 w-2 h-2 bg-em-accent rounded-full"></span> 
-                                ENCRYPTION: <span class="text-em-white">ACTIVE</span>
+                                <span class="inline-block mr-2 w-2 h-2 rounded-full transition-colors duration-300" :class="loading ? 'bg-em-ice animate-pulse' : 'bg-em-accent animate-pulse'"></span> 
+                                ENCRYPTION: <span class="text-em-white" x-text="loading ? 'ESTABLISHING...' : 'ACTIVE'">ACTIVE</span>
                             </div>
                             
-                            <button type="submit" class="w-full md:w-auto relative group/btn overflow-hidden bg-em-white border border-em-white outline-none">
-                                <span class="relative z-10 flex items-center justify-center gap-3 px-10 py-4 font-primary text-black font-black uppercase tracking-[0.15em] text-sm group-hover/btn:text-em-white transition-colors duration-300 delay-75">
-                                    TRANSMIT PAYLOAD <span class="material-symbols-outlined text-[18px]">send</span>
+                            <button type="submit" :disabled="loading" class="w-full md:w-auto relative group/btn overflow-hidden border outline-none transition-all duration-300" :class="loading ? 'bg-em-steel border-em-steel cursor-not-allowed opacity-80' : 'bg-em-white border-em-white'">
+                                <span class="relative z-10 flex items-center justify-center gap-3 px-10 py-4 font-primary text-black font-black uppercase tracking-[0.15em] text-sm transition-colors duration-300 delay-75" :class="!loading && 'group-hover/btn:text-em-white'">
+                                    <span x-show="!loading" class="flex items-center gap-3">TRANSMIT PAYLOAD <span class="material-symbols-outlined text-[18px]">send</span></span>
+                                    <span x-show="loading" class="flex items-center gap-3" style="display: none;">ENCRYPTING... <span class="material-symbols-outlined text-[18px] animate-[spin_2s_linear_infinite]">sync</span></span>
                                 </span>
                                 {{-- Hover Sweep --}}
-                                <div class="absolute inset-0 bg-em-black transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300 ease-out z-0"></div>
-                                <div class="absolute inset-0 bg-em-accent transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300 ease-out z-0 delay-75"></div>
+                                <div x-show="!loading" class="absolute inset-0 bg-em-black transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300 ease-out z-0"></div>
+                                <div x-show="!loading" class="absolute inset-0 bg-em-accent transform -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-300 ease-out z-0 delay-75"></div>
                             </button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> <!-- End x-data container -->
 
             {{-- Communication Network (Socials) --}}
             <div class="mt-12 gs-footer-channels opacity-0 translate-y-8">
@@ -477,6 +488,68 @@
                 scale: 1.1, opacity: 0.3, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut"
             });
         }
+    });
+
+    // Alpine component for form handling
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('contactTerminal', () => ({
+            status: 'idle', // idle, loading, success, error
+            errorMessage: '',
+            loading: false,
+
+            async submitForm() {
+                if (this.loading) return;
+                
+                this.loading = true;
+                this.status = 'idle';
+                this.errorMessage = '';
+
+                const form = this.$refs.form;
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch("{{ route('contact.submit') }}", {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        this.status = 'success';
+                        // Keep loading briefly for cinematic effect then clear
+                        setTimeout(() => {
+                            this.loading = false;
+                        }, 500);
+                    } else {
+                        this.status = 'error';
+                        this.loading = false;
+                        if (response.status === 422) {
+                            // Validation error
+                            const firstError = Object.values(data.errors)[0][0];
+                            this.errorMessage = "VALIDATION FAILED - " + firstError.toUpperCase();
+                        } else if (response.status === 429) {
+                            this.errorMessage = "RATE LIMIT EXCEEDED. STAND BY.";
+                        } else {
+                            this.errorMessage = data.message ? data.message.toUpperCase() : "TRANSMISSION FAILED.";
+                        }
+                    }
+                } catch (error) {
+                    this.status = 'error';
+                    this.loading = false;
+                    this.errorMessage = "NETWORK FAILURE. CHECK CONNECTION.";
+                }
+            },
+
+            resetForm() {
+                this.$refs.form.reset();
+                this.status = 'idle';
+            }
+        }));
     });
 </script>
 @endpush
