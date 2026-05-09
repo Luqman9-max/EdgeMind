@@ -33,7 +33,7 @@
 
             {{-- Contact & Status --}}
             <div class="terminal-col col-status">
-                <a href="mailto:hello@edgemind.com" class="terminal-email glitch-hover" data-text="hello@edgemind.com">hello@edgemind.com</a>
+                <a href="mailto:v.e.d.g.e.m.i.n.d@gmail.com" class="terminal-email glitch-hover" data-text="v.e.d.g.e.m.i.n.d@gmail.com">v.e.d.g.e.m.i.n.d@gmail.com</a>
                 <div class="status-divider"></div>
                 <div class="status-label">SYSTEM STATUS:</div>
                 <div class="status-value">
