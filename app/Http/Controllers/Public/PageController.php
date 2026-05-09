@@ -33,8 +33,9 @@ class PageController extends Controller
             // Save to database
             ContactMessage::create($validated);
 
-            // Send email notification
-            Mail::to(config('mail.from.address'))->send(new ContactFormMail($validated));
+            // Send email notification to the designated admin email
+            $toEmail = env('MAIL_TO_ADDRESS', config('mail.from.address'));
+            Mail::to($toEmail)->send(new ContactFormMail($validated));
 
             return response()->json(['success' => true, 'message' => 'Signal received.']);
         } catch (\Exception $e) {
